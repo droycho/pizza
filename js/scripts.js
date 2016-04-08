@@ -4,6 +4,9 @@ function Order(first, last) {
   this.lastName = last;
   this.pizzas = [];
 }
+Order.prototype.fullName = function() {
+  return this.firstName + " " + this.lastName;
+}
 function Pizza(size, sauce, topping1, topping2, topping3) {
   this.size = size;
   this.sauce = sauce;
@@ -11,8 +14,6 @@ function Pizza(size, sauce, topping1, topping2, topping3) {
   this.topping2 = topping2;
   this.topping3 = topping3;
 }
-
-
 // Business Logic-End
 // Interface Logic-Start
 $(document).ready(function() {
@@ -106,9 +107,9 @@ $(document).ready(function() {
   });
   $("form#new-contact").submit(function(event) {
     event.preventDefault();
-    var inputtedFirstName = $("input#new-first-name").val();
-    var inputtedLastName = $("input#new-last-name").val();
-    var newOrder = new Order(inputtedFirstName, inputtedLastName);
+      var firstName = $("input#new-first-name").val();
+      var lastName = $("input#new-last-name").val();
+      var newOrder = new Order(firstName, lastName);
     $(".new-pizza").each(function() {
       var selectSize = $(this).find("#new-pizza-size").val();
       var selectSauce = $(this).find("#new-pizza-sauce").val();
@@ -117,18 +118,18 @@ $(document).ready(function() {
       var selectTopping3 = $(this).find("#new-topping3").val();
       var newPizza = new Pizza(selectSize, selectSauce, selectTopping1, selectTopping2, selectTopping3);
       newOrder.pizzas.push(newPizza);
-      console.log(inputtedFirstName);
-      console.log(inputtedLastName);
-      console.log(newOrder);
-    console.log(selectSize);
-    console.log(selectSauce);
-    console.log(selectTopping1);
-    console.log(selectTopping2);
-    console.log(selectTopping3);
-    console.log(newPizza);
     });
+    $("ul#order").append("<li><span class='contact'>" + newOrder.fullName() + "</span></li>");
+
   });
+
+
+
+
+
+
+
+
+
 });
-
-
 // Interface Logic-End
