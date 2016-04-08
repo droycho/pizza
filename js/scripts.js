@@ -14,6 +14,9 @@ function Pizza(size, sauce, topping1, topping2, topping3) {
   this.topping2 = topping2;
   this.topping3 = topping3;
 }
+Pizza.prototype.fullPizza = function() {
+  return this.size + " pizza with  " + this.topping1 + ", " + this.topping2 + ", and " + this.topping3 + " on " + this.sauce;
+}
 // Business Logic-End
 // Interface Logic-Start
 $(document).ready(function() {
@@ -118,9 +121,20 @@ $(document).ready(function() {
       var selectTopping3 = $(this).find("#new-topping3").val();
       var newPizza = new Pizza(selectSize, selectSauce, selectTopping1, selectTopping2, selectTopping3);
       newOrder.pizzas.push(newPizza);
-    });
+    // });
     $("ul#order").append("<li><span class='contact'>" + newOrder.fullName() + "</span></li>");
-
+    console.log(newPizza.fullPizza);
+    console.log(newPizza);
+    // $(".contact").last().click(function() {
+      $("#show-order").show();
+      $("#show-order h2").text(newOrder.fullName());
+      $(".first-name").text(newOrder.firstName);
+      $(".last-name").text(newOrder.lastName);
+      $("ul#orders").text("");
+      newOrder.pizzas.forEach(function(address) {
+        $("ul#orders").append("<li><span class='contact'>" + newPizza.fullPizza() + "</span></li>");
+      });
+    });
   });
 
 
