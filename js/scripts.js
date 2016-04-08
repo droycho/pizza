@@ -15,7 +15,7 @@ function Pizza(size, sauce, topping1, topping2, topping3) {
   this.topping3 = topping3;
 }
 Pizza.prototype.fullPizza = function() {
-  return this.size + " pizza with  " + this.topping1 + ", " + this.topping2 + ", and " + this.topping3 + " on " + this.sauce;
+  return this.size + " pizza with  " + this.topping1 + ", " + this.topping2 + ", and " + this.topping3 + " on " + this.sauce + " sauce.";
 }
 // Business Logic-End
 // Interface Logic-Start
