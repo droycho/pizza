@@ -1,5 +1,21 @@
-$(document).ready(function() {
+// Business Logic-Start
+function Order(first, last) {
+  this.firstName = first;
+  this.lastName = last;
+  this.pizzas = [];
+}
+function Pizza(size, sauce, topping1, topping2, topping3) {
+  this.size = size;
+  this.sauce = sauce;
+  this.topping1 = topping1;
+  this.topping2 = topping2;
+  this.topping3 = topping3;
+}
 
+
+// Business Logic-End
+// Interface Logic-Start
+$(document).ready(function() {
   $("#add-pizza").click(function() {
     $("#new-pizzas").append('<h3>Next pizza:</h3>'+
                             '<div class="new-pizza">'+
@@ -89,3 +105,15 @@ $(document).ready(function() {
                             '</div>');
   });
 });
+$(".new-pizza").each(function() {
+  var selectSize = $(this).find("input.new-pizza-size").val();
+  var selectSauce = $(this).find("input.new-pizza-sauce").val();
+  var selectTopping1 = $(this).find("input.new-topping1").val();
+  var selectTopping2 = $(this).find("input.new-topping2").val();
+  var selectTopping3 = $(this).find("input.new-topping3").val();
+  var newOrder = new Order(selectSize, selectSauce, selectTopping1, selectTopping2, selectTopping3);
+  newContact.addresses.push(newAddress);
+});
+
+
+// Interface Logic-End
