@@ -3,10 +3,12 @@ function Order(first, last) {
   this.firstName = first;
   this.lastName = last;
   this.pizzas = [];
+  this.prices = [];
 }
 Order.prototype.fullName = function() {
   return this.firstName + " " + this.lastName;
 }
+
 function Pizza(size, sauce, topping1, topping2, topping3) {
   this.size = size;
   this.sauce = sauce;
@@ -17,6 +19,17 @@ function Pizza(size, sauce, topping1, topping2, topping3) {
 Pizza.prototype.fullPizza = function() {
   return this.size + " pizza with  " + this.topping1 + ", " + this.topping2 + ", and " + this.topping3 + " on " + this.sauce + " sauce.";
 }
+
+function Price(sizePrice, topping1Price, topping2Price, topping3Price) {
+  this.sizePrice = sizePrice;
+  this.topping1Price = topping1Price;
+  this.topping2Price = topping2Price;
+  this.topping3Price = topping3Price;
+}
+Price.prototype.fullPrice = function() {
+  return this.sizePrice + this.topping1Price + this.topping2Price + this.topping3Price;
+}
+
 // Business Logic-End
 // Interface Logic-Start
 $(document).ready(function() {
@@ -58,7 +71,7 @@ $(document).ready(function() {
                                   '<option>Red Onions</option>'+
                                   '<option>Black Olives</option>'+
                                   '<option>Bell Peppers</option>'+
-                                  '<option>Banna Peppers</option>'+
+                                  '<option>Banana Peppers</option>'+
                                   '<option>Pineapple</option>'+
                                   '<option>Jalapeno Peppers</option>'+
                                   '<option>Diced Tomatoes</option>'+
@@ -79,7 +92,7 @@ $(document).ready(function() {
                                   '<option>Red Onions</option>'+
                                   '<option>Black Olives</option>'+
                                   '<option>Bell Peppers</option>'+
-                                  '<option>Banna Peppers</option>'+
+                                  '<option>Banana Peppers</option>'+
                                   '<option>Pineapple</option>'+
                                   '<option>Jalapeno Peppers</option>'+
                                   '<option>Diced Tomatoes</option>'+
@@ -100,7 +113,7 @@ $(document).ready(function() {
                                   '<option>Red Onions</option>'+
                                   '<option>Black Olives</option>'+
                                   '<option>Bell Peppers</option>'+
-                                  '<option>Banna Peppers</option>'+
+                                  '<option>Banana Peppers</option>'+
                                   '<option>Pineapple</option>'+
                                   '<option>Jalapeno Peppers</option>'+
                                   '<option>Diced Tomatoes</option>'+
@@ -121,20 +134,50 @@ $(document).ready(function() {
       var selectTopping3 = $(this).find("#new-topping3").val();
       var newPizza = new Pizza(selectSize, selectSauce, selectTopping1, selectTopping2, selectTopping3);
       newOrder.pizzas.push(newPizza);
-    // });
-    $("ul#order").append("<li><span class='contact'>" + newOrder.fullName() + "</span></li>");
-    console.log(newPizza.fullPizza);
-    console.log(newPizza);
-    // $(".contact").last().click(function() {
+
+      if (selectSize === "Small") {
+        var sizePrice = 10;
+      } else if (selectSize === "Medium") {
+        var sizePrice = 12;
+      } else if (selectSize === "Large") {
+        var sizePrice = 14;
+      } else if (selectSize === "Extra Large") {
+        var sizePrice = 16;
+      }
+      if (selectTopping1 === "Pepperoni" || selectTopping1 === "Italian Sausage" || selectTopping1 === "Salami" || selectTopping1 === "Meatball" || selectTopping1 === "Bacon" || selectTopping1 === "Smoked Ham" || selectTopping1 === "Chicken") {
+        var topping1Price = 2;
+      } else if (selectTopping1 === "Mushrooms" || selectTopping1 === "Red Onions" || selectTopping1 === "Black Olives" || selectTopping1 === "Bell Peppers" || selectTopping1 === "Banana Peppers" || selectTopping1 === "Pineapple" || selectTopping1 === "Jalapeno Peppers" || selectTopping1 === "Diced Tomatoes") {
+        var topping1Price = 1
+      }
+
+      if (selectTopping2 === "Pepperoni" || selectTopping2 === "Italian Sausage" || selectTopping2 === "Salami" || selectTopping2 === "Meatball" || selectTopping2 === "Bacon" || selectTopping2 === "Smoked Ham" || selectTopping2 === "Chicken") {
+        var topping2Price = 2;
+      } else if (selectTopping2 === "Mushrooms" || selectTopping2 === "Red Onions" || selectTopping2 === "Black Olives" || selectTopping2 === "Bell Peppers" || selectTopping2 === "Banana Peppers" || selectTopping2 === "Pineapple" || selectTopping2 === "Jalapeno Peppers" || selectTopping2 === "Diced Tomatoes") {
+        var topping2Price = 1
+      }
+
+      if (selectTopping3 === "Pepperoni" || selectTopping3 === "Italian Sausage" || selectTopping3 === "Salami" || selectTopping3 === "Meatball" || selectTopping3 === "Bacon" || selectTopping3 === "Smoked Ham" || selectTopping3 === "Chicken") {
+        var topping3Price = 2;
+      } else if (selectTopping3 === "Mushrooms" || selectTopping3 === "Red Onions" || selectTopping3 === "Black Olives" || selectTopping3 === "Bell Peppers" || selectTopping3 === "Banana Peppers" || selectTopping3 === "Pineapple" || selectTopping3 === "Jalapeno Peppers" || selectTopping3 === "Diced Tomatoes") {
+        var topping3Price = 1
+      }
+
+      var newPrice = new Price(sizePrice, topping1Price, topping2Price, topping3Price);
+      newOrder.prices.push(newPrice);
+
       $("#show-order").show();
       $("#show-order h2").text(newOrder.fullName());
       $(".first-name").text(newOrder.firstName);
       $(".last-name").text(newOrder.lastName);
-      $("ul#orders").text("");
-      newOrder.pizzas.forEach(function(address) {
+      console.log(newPrice);
+      newOrder.pizzas.forEach(function(pizzas) {
         $("ul#orders").append("<li><span class='contact'>" + newPizza.fullPizza() + "</span></li>");
       });
+      newOrder.prices.forEach(function(prices){
+        $("ul#price").append("<li><span class='contact'>" + "$" + newPrice.fullPrice() + "</span></li>")
+      });
     });
+
   });
 
 
