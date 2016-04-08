@@ -104,29 +104,29 @@ $(document).ready(function() {
                               '</div>'+
                             '</div>');
   });
-});
-
-$("form#submit-order").submit(function(event) {
-  event.preventDefault();
-  var inputtedFirstName = $("input#new-first-name").val();
-  var inputtedLastName = $("input#new-last-name").val();
-  var newOrder = new Order(inputtedFirstName, inputtedLastName);
-  $(".new-pizza").each(function() {
-    var selectSize = $(this).find("input#new-pizza-size").val();
-    var selectSauce = $(this).find("input#new-pizza-sauce").val();
-    var selectTopping1 = $(this).find("input#new-topping1").val();
-    var selectTopping2 = $(this).find("input#new-topping2").val();
-    var selectTopping3 = $(this).find("input#new-topping3").val();
-    var newPizza = new Order(selectSize, selectSauce, selectTopping1, selectTopping2, selectTopping3);
-    newOrder.pizzas.push(newPizza);
-    console.log(inputtedFirstName);
-    console.log(inputtedLastName);
-    console.log(newOrder);
-  console.log(selectSize);
-  console.log(selectSauce);
-  console.log(selectTopping1);
-  console.log(selectTopping2);
-  console.log(selectTopping3);
+  $("form#new-contact").submit(function(event) {
+    event.preventDefault();
+    var inputtedFirstName = $("input#new-first-name").val();
+    var inputtedLastName = $("input#new-last-name").val();
+    var newOrder = new Order(inputtedFirstName, inputtedLastName);
+    $(".new-pizza").each(function() {
+      var selectSize = $(this).find("#new-pizza-size").val();
+      var selectSauce = $(this).find("#new-pizza-sauce").val();
+      var selectTopping1 = $(this).find("#new-topping1").val();
+      var selectTopping2 = $(this).find("#new-topping2").val();
+      var selectTopping3 = $(this).find("#new-topping3").val();
+      var newPizza = new Pizza(selectSize, selectSauce, selectTopping1, selectTopping2, selectTopping3);
+      newOrder.pizzas.push(newPizza);
+      console.log(inputtedFirstName);
+      console.log(inputtedLastName);
+      console.log(newOrder);
+    console.log(selectSize);
+    console.log(selectSauce);
+    console.log(selectTopping1);
+    console.log(selectTopping2);
+    console.log(selectTopping3);
+    console.log(newPizza);
+    });
   });
 });
 
